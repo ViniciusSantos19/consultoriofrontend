@@ -3,17 +3,15 @@ import React, {useState} from 'react';
 
 
 function EnderecoForm() {
-  const Endereco = () => {
-    const [endereco, setEndereco] = useState({
-      logradouro: '',
-      complemento: '',
-      numero: 0,
-      bairro: '',
-      unidadeFederal: '',
-      cidade: '',
-      cep: '',
-    });
-  };
+  const [endereco, setEndereco] = useState({
+    logradouro: '',
+    complemento: '',
+    numero: 0,
+    bairro: '',
+    unidadeFederal: '',
+    cidade: '',
+    cep: '',
+  });
 
   const handleEnderecoChange = (event) => {
     setEndereco({
