@@ -64,7 +64,7 @@ function MedicoForm() {
           <option value="Ortopedia">Ortopedia</option>
           <option value="Cardiologia">Cardiologia</option>
           <option value="Ginecologia">Ginecologia</option>
-        </select>*/
+        </select>
 
         <button type="submit">{loading ? 'Enviando...' : 'Enviar'}</button>
 
