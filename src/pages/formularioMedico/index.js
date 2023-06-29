@@ -49,13 +49,6 @@ function MedicoForm() {
           onChange={handleChange}
         />
 
-        <label htmlFor='nome'>Nome:</label>
-        <input
-          type='text'
-          id='nome'
-          name='nome'
-          onChange={handleChange}
-        />
 
         <label htmlFor="combobox">Selecione uma especialidade:</label>
         <select id="combobox" onChange={handleChange}>
