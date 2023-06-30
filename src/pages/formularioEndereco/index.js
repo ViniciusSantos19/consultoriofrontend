@@ -1,24 +1,10 @@
 /* eslint-disable require-jsdoc */
-import React, {useState} from 'react';
-
+import React from 'react';
+import useForm from '../../hooks';
 
 function EnderecoForm() {
-  const [endereco, setEndereco] = useState({
-    logradouro: '',
-    complemento: '',
-    numero: 0,
-    bairro: '',
-    unidadeFederal: '',
-    cidade: '',
-    cep: '',
-  });
+  const [{handleChange}] = useForm();
 
-  const handleEnderecoChange = (event) => {
-    setEndereco({
-      ...endereco,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   return (
     <div>
@@ -27,8 +13,7 @@ function EnderecoForm() {
         type='text'
         id='logradouro'
         name='logradouro'
-        value={endereco.logradouro}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='complemento'>Complemento:</label>
@@ -36,8 +21,7 @@ function EnderecoForm() {
         type='text'
         id='complemento'
         name='complemento'
-        value={endereco.complemento}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='numero'>Numero:</label>
@@ -45,8 +29,7 @@ function EnderecoForm() {
         type='number'
         id='numero'
         name='numero'
-        value={endereco.numero}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='bairro'>Bairro:</label>
@@ -54,8 +37,7 @@ function EnderecoForm() {
         type='text'
         id='bairro'
         name='bairro'
-        value={endereco.bairro}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='unidadeFederal'>Unidade Federal:</label>
@@ -63,8 +45,7 @@ function EnderecoForm() {
         type='text'
         id='unidadeFederal'
         name='unidadeFederal'
-        value={endereco.unidadeFederal}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='cidade'>Cidade:</label>
@@ -72,8 +53,7 @@ function EnderecoForm() {
         type='text'
         id='cidade'
         name='cidade'
-        value={endereco.cidade}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
 
       <label htmlFor='cep'>Cep:</label>
@@ -81,10 +61,8 @@ function EnderecoForm() {
         type='text'
         id='cep'
         name='cep'
-        value={endereco.cep}
-        onChange={handleEnderecoChange}
+        onChange={handleChange}
       />
-
     </div>
   );
 }
