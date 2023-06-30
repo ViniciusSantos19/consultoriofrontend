@@ -1,11 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable require-jsdoc */
 import React from 'react';
-import useForm from '../../hooks';
 
-function EnderecoForm() {
-  const [{handleChange}] = useForm();
-
-
+function EnderecoForm({handleChange}) {
   return (
     <div>
       <label htmlFor='logradouro'>Logradouro:</label>
