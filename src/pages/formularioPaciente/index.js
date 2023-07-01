@@ -1,17 +1,16 @@
-/* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
 
-// eslint-disable-next-line require-jsdoc
 import React, {useState} from 'react';
 import EnderecoForm from '../formularioEndereco';
 import '../../style/index.css';
-function MedicoForm() {
-  const dadosMedico = {
+
+
+function PacienteForm() {
+  const dadosPaciente = {
     nome: '',
     telefone: '',
     email: '',
-    crm: '',
-    especialidade: '',
+    cpf: '',
     endereco: {
       logradouro: '',
       complemento: '',
@@ -24,7 +23,7 @@ function MedicoForm() {
 
   };
 
-  const [group, setGroup] = useState(dadosMedico);
+  const [group, setGroup] = useState(dadosPaciente);
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
   // const {id} = useParams();
@@ -42,19 +41,19 @@ function MedicoForm() {
   };
 
   /* const handleSubmit = async (event) => {
-    event.preventDefault();
+        event.preventDefault();
 
-    await fetch('/api/group', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(group),
-    });
-    setGroup(initialFormState);
-    navigate('/groups');
-  }; */
+        await fetch('/api/group', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(group),
+        });
+        setGroup(initialFormState);
+        navigate('/groups');
+      }; */
 
 
   const handleSubmit = (event) => {
@@ -63,7 +62,7 @@ function MedicoForm() {
 
   return (
     <div className='container'>
-      <div className='titulo'>Formulário médico</div>
+      <div className='titulo'>Formulário Paciente</div>
       <form onSubmit={handleSubmit}>
         <div className='detalhes_usuario'>
           <div className='input_box'>
@@ -96,25 +95,15 @@ function MedicoForm() {
           </div>
 
           <div className='input_box'>
-            <label htmlFor='crm'>Crm:</label>
+            <label htmlFor='cpf'>Cpf:</label>
             <input
               type='text'
-              id='crm'
-              name='crm'
+              id='cpf'
+              name='cpf'
               onChange={handleChange}
             />
           </div>
 
-          <div className='input_box'>
-            <label htmlFor="combobox">Selecione uma especialidade:</label>
-            <select id="combobox" onChange={handleChange} name='especialidade'>
-              <option value="">Selecione</option>
-              <option value="Dermatologia">Dermatologia</option>
-              <option value="Ortopedia">Ortopedia</option>
-              <option value="Cardiologia">Cardiologia</option>
-              <option value="Ginecologia">Ginecologia</option>
-            </select>
-          </div>
 
           <div className='endereco'>
             <EnderecoForm handleChange={handleChange}/>
@@ -130,6 +119,4 @@ function MedicoForm() {
       </form>
     </div>
   );
-}
-
-export default MedicoForm;
+} export default PacienteForm;

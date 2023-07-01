@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MedicoForm from './pages/formularioMedico';
+import Rotas from './config/rotas';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-      <MedicoForm></MedicoForm>
+      <Rotas></Rotas>
     </React.StrictMode>,
 );
 
