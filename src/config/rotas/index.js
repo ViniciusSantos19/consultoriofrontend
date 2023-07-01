@@ -8,7 +8,7 @@ import PacienteForm from '../../pages/formularioPaciente';
 function Rotas() {
   return (
     <BrowserRouter>
-      <Menu/>
+      <Menu></Menu>
       <Routes>
         <Route path="/cadastroMedico" element={<MedicoForm/>}/>
         <Route path="/cadastroPaciente" element={<PacienteForm/>}/>
