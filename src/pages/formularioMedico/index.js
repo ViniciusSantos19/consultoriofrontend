@@ -6,6 +6,7 @@ import React, {useState} from 'react';
 import EnderecoForm from '../formularioEndereco';
 import '../../style/index.css';
 import {validateForm} from '../../validaton';
+import {create} from '../../services/medicoService';
 
 function MedicoForm() {
   const dadosMedico = {
@@ -37,15 +38,25 @@ function MedicoForm() {
     if (Object.keys(erros).length == 0) {
       setLoading(true);
       try {
-        console.log(group);
-        console.log(group.endereco);
-        const response = await fetch('/Medicos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const medicoDto = {
+          nome: group.nome,
+          telefone: group.telefone,
+          email: group.email,
+          crm: group.crm,
+          especialidade: group.especialidade,
+          endereco: {
+            logradouro: group.endereco.logradouro,
+            complemento: group.endereco.complemento,
+            numero: group.endereco.numero,
+            bairro: group.endereco.bairro,
+            unidadeFederal: group.endereco.unidadeFederal,
+            cidade: group.endereco.cidade,
+            cep: group.endereco.cep,
           },
-          body: JSON.stringify(group),
-        });
+        };
+        console.log(medicoDto);
+
+        const response = await create(medicoDto);
 
         if (response.ok) {
         // O envio foi bem-sucedido

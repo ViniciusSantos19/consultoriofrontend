@@ -5,7 +5,7 @@ import React, {useState} from 'react';
 import EnderecoForm from '../formularioEndereco';
 import '../../style/index.css';
 import {validateForm} from '../../validaton';
-
+import {create} from '../../services/pacienteService';
 
 function PacienteForm() {
   const dadosPaciente = {
@@ -34,15 +34,23 @@ function PacienteForm() {
     if (Object.keys(erros).length == 0) {
       setLoading(true);
       try {
-        console.log(group);
-        console.log(group.endereco);
-        const response = await fetch('/Medicos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const pacienteDto = {
+          nome: group.nome,
+          telefone: group.telefone,
+          email: group.email,
+          cpf: group.cpf,
+          endereco: {
+            logradouro: group.endereco.logradouro,
+            complemento: group.endereco.complemento,
+            numero: group.endereco.numero,
+            bairro: group.endereco.bairro,
+            unidadeFederal: group.endereco.unidadeFederal,
+            cidade: group.endereco.cidade,
+            cep: group.endereco.cep,
           },
-          body: JSON.stringify(group),
-        });
+        };
+
+        const response = await create(pacienteDto);
 
         if (response.ok) {
         // O envio foi bem-sucedido
@@ -54,6 +62,12 @@ function PacienteForm() {
         }
       } catch (error) {
         console.log('Ocorreu um erro ao enviar os dados:', error);
+        console.log('Erro:', error);
+        console.log('Mensagem de erro:', error.message);
+        console.log('Código de erro:', error.code);
+        console.log('Configuração:', error.config);
+        console.log('Requisição:', error.request);
+        console.log(error.response);
       } finally {
         setLoading(false);
       }
