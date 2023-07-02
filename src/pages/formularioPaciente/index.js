@@ -13,15 +13,13 @@ function PacienteForm() {
     telefone: '',
     email: '',
     cpf: '',
-    endereco: {
-      logradouro: '',
-      complemento: '',
-      numero: 0,
-      bairro: '',
-      unidadeFederal: '',
-      cidade: '',
-      cep: '',
-    },
+    logradouro: '',
+    complemento: '',
+    numero: 0,
+    bairro: '',
+    unidadeFederal: '',
+    cidade: '',
+    cep: '',
 
   };
 
@@ -29,44 +27,33 @@ function PacienteForm() {
   const [loading, setLoading] = useState(false);
 
   const enviarDados = async (event) => {
-    const requiredFields = ['nome', 'telefone', 'email', 'cpf', 'endereco.logradouro', 'endereco.numero', 'endereco.bairro', 'endereco.unidadeFederal', 'endereco.cidade', 'endereco.cep'];
+    const requiredFields = ['nome', 'telefone', 'email', 'cpf', 'logradouro', 'numero', 'bairro', 'unidadeFederal', 'cidade', 'cep'];
     const erros = validateForm(group, requiredFields);
     event.preventDefault();
     if (Object.keys(erros).length == 0) {
       setLoading(true);
-      try {
-        const pacienteDto = {
-          nome: group.nome,
-          telefone: group.telefone,
-          email: group.email,
-          cpf: group.cpf,
-          endereco: {
-            logradouro: group.endereco.logradouro,
-            complemento: group.endereco.complemento,
-            numero: group.endereco.numero,
-            bairro: group.endereco.bairro,
-            unidadeFederal: group.endereco.unidadeFederal,
-            cidade: group.endereco.cidade,
-            cep: group.endereco.cep,
-          },
-        };
+      const pacienteDto = {
+        nome: group.nome,
+        telefone: group.telefone,
+        email: group.email,
+        cpf: group.cpf,
+        endereco: {
+          logradouro: group.logradouro,
+          complemento: group.complemento,
+          numero: group.numero,
+          bairro: group.bairro,
+          unidadeFederal: group.unidadeFederal,
+          cidade: group.cidade,
+          cep: group.cep,
+        },
+      };
 
-        const pacienteJson = JSON.stringify(pacienteDto);
-        const response = await create(pacienteJson);
-
-        if (response.ok) {
-        // O envio foi bem-sucedido
-          console.log('Dados enviados com sucesso!');
-        // Aqui você pode fazer algo, como redirecionar o usuário para outra página
-        } else {
-        // Houve algum erro no envio dos dados
-          console.log('Ocorreu um erro ao enviar os dados.');
-        }
-      } catch (error) {
-        console.log('Ocorreu um erro ao enviar os dados:', error);
-      } finally {
-        setLoading(false);
-      }
+      const pacienteJson = JSON.stringify(pacienteDto);
+      await create(pacienteJson).then(function(response) {
+        console.log(response);
+      }).catch(function(error) {
+        console.log(error);
+      }).finally(setLoading(false));
     } else {
       event.preventDefault();
       console.log(erros);
@@ -78,53 +65,8 @@ function PacienteForm() {
   const handleChange = (event) => {
     const {name, value} = event.target;
 
-    switch (name) {
-      case 'nome':
-      case 'telefone':
-      case 'email':
-      case 'cpf':
-        setGroup((prevGroup) => ({
-          ...prevGroup,
-          [name]: value,
-        }));
-        break;
-
-      case 'logradouro':
-      case 'complemento':
-      case 'numero':
-      case 'bairro':
-      case 'unidadeFederal':
-      case 'cidade':
-      case 'cep':
-        setGroup((prevGroup) => ({
-          ...prevGroup,
-          endereco: {
-            ...prevGroup.endereco,
-            [name]: value,
-          },
-        }));
-        break;
-
-      default:
-        // ignore
-    }
+    setGroup({...group, [name]: value});
   };
-
-  /* const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        await fetch('/api/group', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(group),
-        });
-        setGroup(initialFormState);
-        navigate('/groups');
-      }; */
-
 
   const handleSubmit = (event) => {
     enviarDados(event);
@@ -175,9 +117,7 @@ function PacienteForm() {
           </div>
 
 
-          <div className='endereco'>
-            <EnderecoForm handleChange={handleChange}/>
-          </div>
+          <EnderecoForm handleChange={handleChange}/>
 
 
         </div>

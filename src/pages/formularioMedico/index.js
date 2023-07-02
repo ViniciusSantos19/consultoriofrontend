@@ -15,63 +15,50 @@ function MedicoForm() {
     email: '',
     crm: '',
     especialidade: '',
-    endereco: {
-      logradouro: '',
-      complemento: '',
-      numero: 0,
-      bairro: '',
-      unidadeFederal: '',
-      cidade: '',
-      cep: '',
-    },
+    logradouro: '',
+    complemento: '',
+    numero: 0,
+    bairro: '',
+    unidadeFederal: '',
+    cidade: '',
+    cep: '',
+
 
   };
 
   const [group, setGroup] = useState(dadosMedico);
   const [loading, setLoading] = useState(false);
-  // const navigate = useNavigate();
-  // const {id} = useParams();
 
   const enviarDados = async (event) => {
-    const requiredFields = ['nome', 'telefone', 'email', 'crm', 'especialidade', 'endereco.logradouro', 'endereco.numero', 'endereco.bairro', 'endereco.unidadeFederal', 'endereco.cidade', 'endereco.cep'];
+    const requiredFields = ['nome', 'telefone', 'email', 'crm', 'especialidade', 'logradouro', 'numero', 'bairro', 'unidadeFederal', 'cidade', 'cep'];
     const erros = validateForm(group, requiredFields);
+    event.preventDefault();
     if (Object.keys(erros).length == 0) {
       setLoading(true);
-      try {
-        const medicoDto = {
-          nome: group.nome,
-          telefone: group.telefone,
-          email: group.email,
-          crm: group.crm,
-          especialidade: group.especialidade,
-          endereco: {
-            logradouro: group.endereco.logradouro,
-            complemento: group.endereco.complemento,
-            numero: group.endereco.numero,
-            bairro: group.endereco.bairro,
-            unidadeFederal: group.endereco.unidadeFederal,
-            cidade: group.endereco.cidade,
-            cep: group.endereco.cep,
-          },
-        };
+      const medicoDto = {
+        nome: group.nome,
+        telefone: group.telefone,
+        email: group.email,
+        crm: group.crm,
+        especialidade: group.especialidade,
+        endereco: {
+          logradouro: group.endereco.logradouro,
+          complemento: group.endereco.complemento,
+          numero: group.endereco.numero,
+          bairro: group.endereco.bairro,
+          unidadeFederal: group.endereco.unidadeFederal,
+          cidade: group.endereco.cidade,
+          cep: group.endereco.cep,
+        },
+      };
 
-        const medicoJson = JSON.stringify(medicoDto);
+      const medicoJson = JSON.stringify(medicoDto);
 
-        const response = await create(medicoJson);
-
-        if (response.ok) {
-        // O envio foi bem-sucedido
-          console.log('Dados enviados com sucesso!');
-        // Aqui você pode fazer algo, como redirecionar o usuário para outra página
-        } else {
-        // Houve algum erro no envio dos dados
-          console.log('Ocorreu um erro ao enviar os dados.');
-        }
-      } catch (error) {
-        console.log('Ocorreu um erro ao enviar os dados:', error);
-      } finally {
-        setLoading(false);
-      }
+      await create(medicoJson).then(function(response) {
+        console.log(response);
+      }).catch(function(error) {
+        console.log(error);
+      }).finally(setLoading(false));
     } else {
       event.preventDefault();
       console.log(erros);
@@ -82,37 +69,7 @@ function MedicoForm() {
   const handleChange = (event) => {
     const {name, value} = event.target;
 
-    switch (name) {
-      case 'nome':
-      case 'telefone':
-      case 'email':
-      case 'crm':
-      case 'especialidade':
-        setGroup((prevGroup) => ({
-          ...prevGroup,
-          [name]: value,
-        }));
-        break;
-
-      case 'logradouro':
-      case 'complemento':
-      case 'numero':
-      case 'bairro':
-      case 'unidadeFederal':
-      case 'cidade':
-      case 'cep':
-        setGroup((prevGroup) => ({
-          ...prevGroup,
-          endereco: {
-            ...prevGroup.endereco,
-            [name]: value,
-          },
-        }));
-        break;
-
-      default:
-        // ignore
-    }
+    setGroup({...group, [name]: value});
   };
 
 
@@ -175,15 +132,13 @@ function MedicoForm() {
             </select>
           </div>
 
-          <div className='endereco'>
-            <EnderecoForm handleChange={handleChange}/>
-          </div>
+          <EnderecoForm handleChange={handleChange}/>
 
 
         </div>
 
         <div className='button'>
-          <button type="submit">{loading ? 'Enviando...' : 'Enviar'}</button>
+          <button type="button" onClick={handleSubmit}>{loading ? 'Enviando...' : 'Enviar'}</button>
         </div>
 
       </form>
