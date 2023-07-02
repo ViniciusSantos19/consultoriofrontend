@@ -54,9 +54,10 @@ function MedicoForm() {
             cep: group.endereco.cep,
           },
         };
-        console.log(medicoDto);
 
-        const response = await create(medicoDto);
+        const medicoJson = JSON.stringify(medicoDto);
+
+        const response = await create(medicoJson);
 
         if (response.ok) {
         // O envio foi bem-sucedido

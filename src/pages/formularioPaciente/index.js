@@ -31,6 +31,7 @@ function PacienteForm() {
   const enviarDados = async (event) => {
     const requiredFields = ['nome', 'telefone', 'email', 'cpf', 'endereco.logradouro', 'endereco.numero', 'endereco.bairro', 'endereco.unidadeFederal', 'endereco.cidade', 'endereco.cep'];
     const erros = validateForm(group, requiredFields);
+    event.preventDefault();
     if (Object.keys(erros).length == 0) {
       setLoading(true);
       try {
@@ -50,7 +51,8 @@ function PacienteForm() {
           },
         };
 
-        const response = await create(pacienteDto);
+        const pacienteJson = JSON.stringify(pacienteDto);
+        const response = await create(pacienteJson);
 
         if (response.ok) {
         // O envio foi bem-sucedido
@@ -62,12 +64,6 @@ function PacienteForm() {
         }
       } catch (error) {
         console.log('Ocorreu um erro ao enviar os dados:', error);
-        console.log('Erro:', error);
-        console.log('Mensagem de erro:', error.message);
-        console.log('Código de erro:', error.code);
-        console.log('Configuração:', error.config);
-        console.log('Requisição:', error.request);
-        console.log(error.response);
       } finally {
         setLoading(false);
       }
@@ -187,7 +183,7 @@ function PacienteForm() {
         </div>
 
         <div className='button'>
-          <button type="submit">{loading ? 'Enviando...' : 'Enviar'}</button>
+          <button type="button" onClick={handleSubmit}>{loading ? 'Enviando...' : 'Enviar'}</button>
         </div>
 
       </form>
