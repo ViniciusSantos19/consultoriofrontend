@@ -42,13 +42,13 @@ function MedicoForm() {
         crm: group.crm,
         especialidade: group.especialidade,
         endereco: {
-          logradouro: group.endereco.logradouro,
-          complemento: group.endereco.complemento,
-          numero: group.endereco.numero,
-          bairro: group.endereco.bairro,
-          unidadeFederal: group.endereco.unidadeFederal,
-          cidade: group.endereco.cidade,
-          cep: group.endereco.cep,
+          logradouro: group.logradouro,
+          complemento: group.complemento,
+          numero: group.numero,
+          bairro: group.bairro,
+          unidadeFederal: group.unidadeFederal,
+          cidade: group.cidade,
+          cep: group.cep,
         },
       };
 

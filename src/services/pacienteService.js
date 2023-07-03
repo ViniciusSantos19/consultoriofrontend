@@ -1,7 +1,7 @@
 import api from '../http-common';
 
 export const getAll = () => {
-  return api.get('/Pacientes');
+  return api.get(`/Pacientes?pagina=${pagina}`);
 };
 
 export const create = (data) => {
@@ -13,5 +13,5 @@ export const update = (data, id) => {
 };
 
 export const remove = (id) => {
-  return api.delete(`/Pacientes/${id}`);
+  return api.delete(`Pacientes/${id}`);
 };

@@ -55,7 +55,6 @@ function PacienteForm() {
         console.log(error);
       }).finally(setLoading(false));
     } else {
-      event.preventDefault();
       console.log(erros);
       alert('Preencha todos os campos do formulário');
     }

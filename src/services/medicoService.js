@@ -1,7 +1,7 @@
 import api from '../http-common';
 
-export const getAll = () => {
-  return api.get('/Medicos');
+export const getAll = (pagina) => {
+  return api.get(`/Medicos?pagina=${pagina}`);
 };
 
 export const create = (data) => {
