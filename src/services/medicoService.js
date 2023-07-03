@@ -8,10 +8,10 @@ export const create = (data) => {
   return api.post('/Medicos', data);
 };
 
-export const update = (data, cpf) => {
-  return api.put(`/Medicos/${cpf}`, data);
+export const update = (data, crm) => {
+  return api.put(`/Medicos/${crm}`, data);
 };
 
-export const remove = (cpf) => {
-  return api.delete(`/Medicos/${cpf}`);
+export const remove = (crm) => {
+  return api.delete(`/Medicos/${crm}`);
 };

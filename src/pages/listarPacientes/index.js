@@ -4,7 +4,7 @@
 import React, {useEffect, useState} from 'react';
 import {remove, getAll} from '../../services/pacienteService';
 import {Link} from 'react-router-dom';
-
+import '../../style/listar.css';
 function ListarPacientes() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,6 +12,7 @@ function ListarPacientes() {
 
   const handleDelete = async (cpf) => {
     await remove(cpf).then((response)=>{
+      setGroups(groups.filter((group) => group.cpf !== cpf));
       console.log(response.data);
     }).catch((error)=>{
       console.log(error);
@@ -34,16 +35,16 @@ function ListarPacientes() {
 
   const pacienteList = groups.map((group) => {
     return (
-      <tr key={group.cpf}>
+      <tr key={group.cpf} className='rows'>
         <td>{group.nome}</td>
         <td>{group.email}</td>
         <td>{group.cpf}</td>
         <td>
           <div className=' botoes'>
             <Link to='/pacienteUpdateForm'>
-              <button size="sm" color="primary">Edit</button>
+              <button size="sm" className='atualizar'>atualizar</button>
             </Link>
-            <button size="sm" color="danger" onClick={() => handleDelete(group.cpf)}>Delete</button>
+            <button size="sm" className='deletar' onClick={() => handleDelete(group.cpf)}>Deletar</button>
           </div>
         </td>
       </tr>
@@ -51,19 +52,15 @@ function ListarPacientes() {
   });
 
   return (
-    <div>
-      <div className="float-end">
-        <Link to='/cadastroPaciente'>
-          <button color="success">Cadastrar Paciente</button>
-        </Link>
-      </div>
-      <h3>Médcios</h3>
+    <div className='container'>
+      <h3 className='titulo'>Pacintes</h3>
       <table className="mt-4">
         <thead>
           <tr>
             <th width="20%">Nome</th>
             <th width="20%">Email</th>
             <th width="20%">Cpf</th>
+            <th width="10%">Ações</th>
           </tr>
         </thead>
         <tbody>

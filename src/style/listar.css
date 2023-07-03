@@ -1,0 +1,60 @@
+/* Estilos para os botões */
+.botoes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .atualizar {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color:  #FFD700;;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  
+  .deletar {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .atualizar:hover,
+  .deletar:hover {
+    opacity: 0.8;
+  }
+  
+  .container{
+    max-width: 1000px;
+    width: 100%;
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.container .titulo{
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+  color: crimson;
+}
+
+.container .titulo::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}

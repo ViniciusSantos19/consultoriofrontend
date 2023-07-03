@@ -4,10 +4,20 @@
 import React, {useEffect, useState} from 'react';
 import {remove, getAll} from '../../services/medicoService';
 import {Link} from 'react-router-dom';
+import '../../style/listar.css';
 
 function ListarMedicos() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const handleDelete = async (crm) => {
+    await remove(crm).then((response)=>{
+      setGroups(groups.filter((group) => group.crm !== crm));
+      console.log(response.data);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  };
 
   useEffect(() =>{
     setLoading(true);
@@ -33,9 +43,9 @@ function ListarMedicos() {
         <td>
           <div>
             <Link to='/medicoUpdateForm'>
-              <button size="sm" color="primary">Edit</button>
+              <button size="sm" className='atualizar'>Edit</button>
             </Link>
-            <button size="sm" color="danger" onClick={() => remove(group.crm)}>Delete</button>
+            <button size="sm" className='deletar' onClick={() => handleDelete(group.crm)}>Delete</button>
           </div>
         </td>
       </tr>
@@ -43,13 +53,8 @@ function ListarMedicos() {
   });
 
   return (
-    <div>
-      <div className="float-end">
-        <Link to='/cadastroMedico'>
-          <button color="success">Cadastrar médico</button>
-        </Link>
-      </div>
-      <h3>Médcios</h3>
+    <div className='container'>
+      <h3 className='titulo'>Médcios</h3>
       <table className="mt-4">
         <thead>
           <tr>
@@ -57,6 +62,7 @@ function ListarMedicos() {
             <th width="20%">Email</th>
             <th width="20%">Crm</th>
             <th width="10%">Especialidade</th>
+            <th width="20%">Ação</th>
           </tr>
         </thead>
         <tbody>
