@@ -8,10 +8,10 @@ export const create = (data) => {
   return api.post('/Medicos', data);
 };
 
-export const update = (data, id) => {
-  return api.put(`/Medicos/${id}`, data);
+export const update = (data, cpf) => {
+  return api.put(`/Medicos/${cpf}`, data);
 };
 
-export const remove = (id) => {
-  return api.delete(`/Medicos/${id}`);
+export const remove = (cpf) => {
+  return api.delete(`/Medicos/${cpf}`);
 };

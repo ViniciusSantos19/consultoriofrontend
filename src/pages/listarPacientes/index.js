@@ -9,6 +9,15 @@ function ListarPacientes() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
 
+
+  const handleDelete = async (cpf) => {
+    await remove(cpf).then((response)=>{
+      console.log(response.data);
+    }).catch((error)=>{
+      console.log(error);
+    });
+  };
+
   useEffect(() =>{
     setLoading(true);
     getAll(1).then(function(response) {
@@ -30,11 +39,11 @@ function ListarPacientes() {
         <td>{group.email}</td>
         <td>{group.cpf}</td>
         <td>
-          <div>
+          <div className=' botoes'>
             <Link to='/pacienteUpdateForm'>
               <button size="sm" color="primary">Edit</button>
             </Link>
-            <button size="sm" color="danger" onClick={() => remove(group.crm)}>Delete</button>
+            <button size="sm" color="danger" onClick={() => handleDelete(group.cpf)}>Delete</button>
           </div>
         </td>
       </tr>

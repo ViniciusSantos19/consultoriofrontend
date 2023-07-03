@@ -1,6 +1,6 @@
 import api from '../http-common';
 
-export const getAll = () => {
+export const getAll = (pagina) => {
   return api.get(`/Pacientes?pagina=${pagina}`);
 };
 
@@ -8,10 +8,10 @@ export const create = (data) => {
   return api.post('/Pacientes', data);
 };
 
-export const update = (data, id) => {
-  return api.put(`/Pacientes/${id}`, data);
+export const update = (data, cpf) => {
+  return api.put(`/Pacientes/${cpf}`, data);
 };
 
-export const remove = (id) => {
-  return api.delete(`Pacientes/${id}`);
+export const remove = (cpf) => {
+  return api.delete(`/Pacientes/${cpf}`);
 };

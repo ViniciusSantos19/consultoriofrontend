@@ -5,8 +5,8 @@ import React from 'react';
 import Menu from '../../components';
 import MedicoForm from '../../pages/formularioMedico';
 import PacienteForm from '../../pages/formularioPaciente';
-// import MedicoUpdateForm from '../../pages/formularioMedico/MedicoUpdateForm';
-// import PacienteUpdateForm from '../../pages/formularioPaciente/PacienteUpdateForm';
+import MedicoUpdateForm from '../../pages/formularioMedico/MedicoUpdateForm';
+import PacienteUpdateForm from '../../pages/formularioPaciente/PacienteUpdateForm';
 import ListarMedicos from '../../pages/listarMedicos';
 import ListarPacientes from '../../pages/listarPacientes';
 
@@ -19,6 +19,8 @@ function Rotas() {
         <Route path="/cadastroPaciente" element={<PacienteForm/>}/>
         <Route path="/listarMedicos" element={<ListarMedicos/>}/>
         <Route path='/listarPacientes' element={<ListarPacientes/>}/>
+        <Route path='/atualizarMedicos' element={<MedicoUpdateForm/>}/>
+        <Route path='/atualizarPacientes' element={<PacienteUpdateForm/>}/>
       </Routes>
     </BrowserRouter>
   );
