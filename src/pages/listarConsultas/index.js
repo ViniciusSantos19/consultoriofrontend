@@ -23,7 +23,7 @@ function ListarConsultas() {
     await remove(id, deleteConsultaDtoJson).then((response)=>{
       setGroups(groups.filter((group) => group.id !== id));
       console.log(response.data);
-      toast.success('Consulta apagada com sucesso');
+      toast.success(`Consulta apagada com sucesso ${selectedOption.motivoCancelamento}`);
     }).catch((error)=>{
       console.log(error);
       toast.error('Erro ao apagar consulta');
