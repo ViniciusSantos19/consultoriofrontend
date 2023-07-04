@@ -65,5 +65,6 @@ form .detalhes_usuario .input_box{
   cursor: pointer;
 }
 
-
- 
+.botao:hover {
+  opacity: 0.8;
+}
