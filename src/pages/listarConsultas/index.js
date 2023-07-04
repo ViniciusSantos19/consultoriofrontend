@@ -10,15 +10,23 @@ import 'react-toastify/dist/ReactToastify.css';
 function ListarConsultas() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
+  const Cancelamento = {motivoCancelamento: 'outros'};
+  const [selectedOption, setSelectedOption] = useState(Cancelamento);
 
-  const handleDelete = async (crm) => {
-    await remove(crm).then((response)=>{
-      setGroups(groups.filter((group) => group.crm !== crm));
+
+  const handleDelete = async (id, selectedOption) => {
+    const ConsultaDeleteDto = {
+      motivoCancelamento: selectedOption.MotivoCancelamento,
+    };
+    console.log(ConsultaDeleteDto);
+    const deleteConsultaDtoJson = JSON.stringify(ConsultaDeleteDto);
+    await remove(id, deleteConsultaDtoJson).then((response)=>{
+      setGroups(groups.filter((group) => group.id !== id));
       console.log(response.data);
-      toast.success('Medico apagado com sucesso');
+      toast.success('Consulta apagada com sucesso');
     }).catch((error)=>{
       console.log(error);
-      toast.error('Erro ao apagar médico');
+      toast.error('Erro ao apagar consulta');
     });
   };
 
@@ -36,6 +44,12 @@ function ListarConsultas() {
     return <p>Loading...</p>;
   }
 
+  const handleChange = (event) => {
+    const {name, value} = event.target;
+
+    setSelectedOption({...selectedOption, [name]: value});
+  };
+
   const consultaList = groups.map((group) => {
     return (
       <tr key={group.id} className='rows'>
@@ -45,7 +59,13 @@ function ListarConsultas() {
         <td>{group.dataHora}</td>
         <td>
           <div className='botoes'>
-            <button size="sm" className='deletar' onClick={() => handleDelete(group.id)}>Deletar</button>
+            <select id="combobox" onChange={handleChange} name='motivoCancelamento'>
+              <option value="">Selecione</option>
+              <option value="pacienteDesistiu">Paciente desistiu</option>
+              <option value="médicoCancelou">Medico cancelou</option>
+              <option value="outros">Outros</option>
+            </select>
+            <button size="sm" className='deletar' onClick={() => handleDelete(group.id, selectedOption)}>Deletar</button>
           </div>
         </td>
       </tr>
@@ -62,7 +82,7 @@ function ListarConsultas() {
             <th width="20%">Nome médico</th>
             <th width="20%">Nome paciente</th>
             <th width="10%">Data e hora da consulta</th>
-            <th width="20%">Ação</th>
+            <th width="20%">Cancelar</th>
           </tr>
         </thead>
         <tbody>

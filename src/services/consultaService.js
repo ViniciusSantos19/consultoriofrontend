@@ -9,7 +9,7 @@ export const create = (data) => {
 };
 
 
-export const remove = (id) => {
-  return api.delete(`/Consultas/${id}`);
+export const remove = (id, data) => {
+  return api.delete(`/Consultas/${id}`, data);
 };
 
