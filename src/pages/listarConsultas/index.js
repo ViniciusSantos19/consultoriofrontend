@@ -16,7 +16,7 @@ function ListarConsultas() {
 
   const handleDelete = async (id, selectedOption) => {
     const ConsultaDeleteDto = {
-      motivoCancelamento: selectedOption.MotivoCancelamento,
+      motivoCancelamento: selectedOption.motivoCancelamento,
     };
     console.log(ConsultaDeleteDto);
     const deleteConsultaDtoJson = JSON.stringify(ConsultaDeleteDto);

@@ -8,8 +8,7 @@ export const create = (data) => {
   return api.post('/Consultas', data);
 };
 
-
 export const remove = (id, data) => {
-  return api.delete(`/Consultas/${id}`, data);
+  return api.delete(`/Consultas/${id}`, {data: data});
 };
 
