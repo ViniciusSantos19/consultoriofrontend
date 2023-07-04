@@ -126,7 +126,7 @@ function PacienteForm() {
         </div>
 
         <div className='button'>
-          <button type="button" onClick={handleSubmit}>{loading ? 'Enviando...' : 'Enviar'}</button>
+          <button type="button" onClick={handleSubmit} className='botao'>{loading ? 'Enviando...' : 'Enviar'}</button>
         </div>
         <ToastContainer/>
       </form>
