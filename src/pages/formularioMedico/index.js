@@ -131,7 +131,7 @@ function MedicoForm() {
             <select id="combobox" onChange={handleChange} name='especialidade'>
               <option value="">Selecione</option>
               <option value="Dermatologia">Dermatologia</option>
-              <option value="Ortopedia">Ortopedia</option>
+              <option value="Ortopediam">Ortopedia</option>
               <option value="Cardiologia">Cardiologia</option>
               <option value="Ginecologia">Ginecologia</option>
             </select>

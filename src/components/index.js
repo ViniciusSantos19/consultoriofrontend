@@ -15,6 +15,7 @@ function Menu() {
         <li><Link to='/cadastroConsulta' className='active'>Marcar consultas</Link></li>
         <li><Link to="/listarMedicos" className="active">Listar Medicos</Link></li>
         <li><Link to="/listarPacientes" className='active'>Listar Pacientes</Link> </li>
+        <li><Link to='/listarConsultas' className='active'>Listar Consultas</Link></li>
       </ul>
     </nav>
   );

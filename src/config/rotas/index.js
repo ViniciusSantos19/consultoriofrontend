@@ -10,6 +10,7 @@ import AtualizaPacienteForm from '../../pages/formularioPaciente/PacienteUpdateF
 import ListarMedicos from '../../pages/listarMedicos';
 import ListarPacientes from '../../pages/listarPacientes';
 import ConsultaForm from '../../pages/formulárioConsulta';
+import ListarConsultas from '../../pages/listarConsultas';
 
 function Rotas() {
   return (
@@ -23,6 +24,7 @@ function Rotas() {
         <Route path='/atualizarMedicos/:crm' element={<AtualizaMedicoForm/>}/>
         <Route path='/atualizarPacientes/:cpf' element={<AtualizaPacienteForm/>}/>
         <Route path='/cadastroConsulta' element={<ConsultaForm/>}/>
+        <Route path='/listarConsultas' element={<ListarConsultas/>}/>
       </Routes>
     </BrowserRouter>
   );
