@@ -5,6 +5,8 @@ import React, {useEffect, useState} from 'react';
 import {remove, getAll} from '../../services/pacienteService';
 import {Link} from 'react-router-dom';
 import '../../style/listar.css';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function ListarPacientes() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,8 +16,10 @@ function ListarPacientes() {
     await remove(cpf).then((response)=>{
       setGroups(groups.filter((group) => group.cpf !== cpf));
       console.log(response.data);
+      toast.success('Paciente apagado com sucesso');
     }).catch((error)=>{
       console.log(error);
+      toast.error('Erro ao apagar paciente');
     });
   };
 
@@ -41,7 +45,7 @@ function ListarPacientes() {
         <td>{group.cpf}</td>
         <td>
           <div className=' botoes'>
-            <Link to='/pacienteUpdateForm'>
+            <Link to={`/atualizarPacientes/${group.cpf}`}>
               <button size="sm" className='atualizar'>atualizar</button>
             </Link>
             <button size="sm" className='deletar' onClick={() => handleDelete(group.cpf)}>Deletar</button>
@@ -54,7 +58,7 @@ function ListarPacientes() {
   return (
     <div className='container'>
       <h3 className='titulo'>Pacintes</h3>
-      <table className="mt-4">
+      <table className="tabela">
         <thead>
           <tr>
             <th width="20%">Nome</th>
@@ -67,6 +71,7 @@ function ListarPacientes() {
           {pacienteList}
         </tbody>
       </table>
+      <ToastContainer/>
     </div>
   );
 } export default ListarPacientes;

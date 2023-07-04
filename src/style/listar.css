@@ -58,3 +58,25 @@
   width: 30px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.header-cell {
+  text-align: left;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.rows td {
+  padding: 8px;
+}
+
+.container th,
+.container td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}

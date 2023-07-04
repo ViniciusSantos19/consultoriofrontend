@@ -5,6 +5,8 @@ import React, {useEffect, useState} from 'react';
 import {remove, getAll} from '../../services/medicoService';
 import {Link} from 'react-router-dom';
 import '../../style/listar.css';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ListarMedicos() {
   const [groups, setGroups] = useState([]);
@@ -14,8 +16,10 @@ function ListarMedicos() {
     await remove(crm).then((response)=>{
       setGroups(groups.filter((group) => group.crm !== crm));
       console.log(response.data);
+      toast.success('Medico apagado com sucesso');
     }).catch((error)=>{
       console.log(error);
+      toast.error('Erro ao apagar médico');
     });
   };
 
@@ -35,17 +39,17 @@ function ListarMedicos() {
 
   const medicoList = groups.map((group) => {
     return (
-      <tr key={group.crm}>
+      <tr key={group.crm} className='rows'>
         <td>{group.nome}</td>
         <td>{group.email}</td>
         <td>{group.crm}</td>
         <td>{group.especialidade}</td>
         <td>
-          <div>
-            <Link to='/medicoUpdateForm'>
-              <button size="sm" className='atualizar'>Edit</button>
+          <div className='botoes'>
+            <Link to={`/atualizarMedicos/${group.crm}`}>
+              <button size="sm" className='atualizar'>Atualizar</button>
             </Link>
-            <button size="sm" className='deletar' onClick={() => handleDelete(group.crm)}>Delete</button>
+            <button size="sm" className='deletar' onClick={() => handleDelete(group.crm)}>Deletar</button>
           </div>
         </td>
       </tr>
@@ -54,8 +58,8 @@ function ListarMedicos() {
 
   return (
     <div className='container'>
-      <h3 className='titulo'>Médcios</h3>
-      <table className="mt-4">
+      <h3 className='titulo'>Médicos</h3>
+      <table className="tabela">
         <thead>
           <tr>
             <th width="20%">Nome</th>
@@ -69,6 +73,7 @@ function ListarMedicos() {
           {medicoList}
         </tbody>
       </table>
+      <ToastContainer/>
     </div>
   );
 } export default ListarMedicos;

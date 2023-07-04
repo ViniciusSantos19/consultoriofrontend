@@ -6,6 +6,8 @@ import EnderecoForm from '../formularioEndereco';
 import '../../style/index.css';
 import {validateForm} from '../../validaton';
 import {create} from '../../services/pacienteService';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PacienteForm() {
   const dadosPaciente = {
@@ -51,12 +53,14 @@ function PacienteForm() {
       const pacienteJson = JSON.stringify(pacienteDto);
       await create(pacienteJson).then(function(response) {
         console.log(response);
+        toast.success('Pacientes cadastrado com sucesso');
       }).catch(function(error) {
         console.log(error);
+        toast.error('Erro ao cadastrar Paciente');
       }).finally(setLoading(false));
     } else {
       console.log(erros);
-      alert('Preencha todos os campos do formulário');
+      toast.error('Preencha todos os campos do formulário');
     }
   };
 
@@ -124,7 +128,7 @@ function PacienteForm() {
         <div className='button'>
           <button type="button" onClick={handleSubmit}>{loading ? 'Enviando...' : 'Enviar'}</button>
         </div>
-
+        <ToastContainer/>
       </form>
     </div>
   );
