@@ -5,9 +5,11 @@
 import React, {useState} from 'react';
 import '../../style/index.css';
 import {validateForm} from '../../validaton';
-import {create} from '../../services/medicoService';
+import {create} from '../../services/consultaService';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 
 
 function ConsultaForm() {
@@ -87,11 +89,12 @@ function ConsultaForm() {
 
           <div className='input_box'>
             <label htmlFor='dataHora'>Data e hora da consulta:</label>
-            <input
-              type='datetime-local'
+            <Datetime
               id='dataHora'
               name='dataHora'
-              onChange={handleChange}
+              dateFormat='DD/MM/YYYY'
+              timeFormat='HH:mm:ss'
+              onChange={(value) => handleChange({target: {name: 'dataHora', value}})}
             />
           </div>
 
